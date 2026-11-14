@@ -1,5 +1,19 @@
 # nlp_project
 
+AI が書いた部分と人間が書いた部分が混ざった日本語ニュース記事から、どこが AI 生成かを判別するプロジェクトです。
+
+## 使い方
+
+```bash
+pip install -r requirements.txt
+python placeholders/train_placeholder_model.py
+streamlit run app.py
+```
+
+アプリの詳細と判定の仕組みは [README_app.md](README_app.md) を参照してください。
+
+データセット: [Japanese Fake News Dataset](https://github.com/tanreinama/Japanese-Fakenews-Dataset)
+
 ## データファイル
 
 データセットは、記事単位で学習用80%・テスト用20%に分割しています。
