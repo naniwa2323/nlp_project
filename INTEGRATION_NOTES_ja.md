@@ -7,7 +7,8 @@
 - `model.predict(list[str]) -> [0/1, ...]`（0 = Human, 1 = AI）
 - `model.predict_proba` があればチャンクごとの P(AI) グラフを表示します（`classes_` に 1 が含まれること）。
 - 別パスに置く場合は環境変数 `MODEL_PATH` で指定できます。
-- 置いたら `models/model.PLACEHOLDER` を削除してください（サイドバー表示が「Member 2」に変わります）。
+- そのまま普通にコミットしてください（`.gitignore` の対象は仮モデル `models/placeholder_model.joblib` だけです）。
+- `models/model.joblib` があればアプリは自動的にそちらを使います（サイドバー表示が「Member 2」に変わります）。
 
 ## Member 3 へ（⚠️ 仕様変更 2026-11-14）
 「最初の 人間→AI の切り替わり 1 点」を求める方式から、**全文を人間 / AI の区間に分ける方式**に変更しました。
