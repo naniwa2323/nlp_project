@@ -218,3 +218,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Member 4: generated artifacts
+models/
+results/compare_rules_per_article.csv
