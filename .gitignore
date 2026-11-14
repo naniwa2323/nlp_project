@@ -219,6 +219,6 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-# Member 4: generated artifacts
-models/
+# Member 4: generated artifacts (placeholder model only; Member 2's models/model.joblib is committed)
+models/placeholder_model.joblib
 results/compare_rules_per_article.csv

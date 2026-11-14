@@ -7,6 +7,7 @@ Spec (updated 2026-11-14): label EVERY region of the article as Human or AI
 
 Components
   - Member 2's trained Pipeline -> models/model.joblib (TF-IDF + LogisticRegression)
+                                   falls back to models/placeholder_model.joblib if missing
   - Region segmentation         -> boundary_detector.segment_article(article, model, ...)
                                    if Member 3 provides it, otherwise segmenter.py
 """
@@ -22,7 +23,15 @@ import joblib
 from segmenter import AI, CHUNK_SIZE, HUMAN, STRIDE, chunk_scores, chunk_spans  # noqa: F401
 
 ROOT = Path(__file__).resolve().parent
-MODEL_PATH = Path(os.environ.get("MODEL_PATH", ROOT / "models" / "model.joblib"))
+MODEL_PATH = ROOT / "models" / "model.joblib"  # Member 2
+PLACEHOLDER_PATH = ROOT / "models" / "placeholder_model.joblib"  # placeholders/train_placeholder_model.py
+
+
+def model_path() -> Path:
+    """MODEL_PATH env var > Member 2's model > placeholder."""
+    if os.environ.get("MODEL_PATH"):
+        return Path(os.environ["MODEL_PATH"])
+    return MODEL_PATH if MODEL_PATH.exists() else PLACEHOLDER_PATH
 
 DEFAULT_THRESHOLD = 0.5
 DEFAULT_MIN_LEN = 100  # see results/compare_rules.csv
@@ -41,20 +50,21 @@ def _load_segmenter():
 
 @lru_cache(maxsize=1)
 def load_model():
-    if not MODEL_PATH.exists():
+    path = model_path()
+    if not path.exists():
         raise FileNotFoundError(
-            f"Model not found: {MODEL_PATH}\n"
+            f"Model not found: {MODEL_PATH.relative_to(ROOT)}\n"
             "Put Member 2's model.joblib in models/, or build the placeholder:\n"
             "  python placeholders/train_placeholder_model.py"
         )
-    return joblib.load(MODEL_PATH)
+    return joblib.load(path)
 
 
 def component_info() -> dict:
     _, seg_name = _load_segmenter()
-    placeholder_model = MODEL_PATH.with_suffix(".PLACEHOLDER").exists()
+    path = model_path()
     return {
-        "model": f"{MODEL_PATH.name}" + (" (placeholder)" if placeholder_model else " (Member 2)"),
+        "model": path.name + (" (placeholder)" if path == PLACEHOLDER_PATH else " (Member 2)"),
         "segmenter": seg_name,
     }
 

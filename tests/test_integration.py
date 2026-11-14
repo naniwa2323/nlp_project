@@ -1,7 +1,7 @@
 """Integration tests for Member 4's checklist (region-segmentation spec).
 
 Run: python -m pytest tests -q
-Needs models/model.joblib (real or placeholder) and data/processed/test_articles.csv (Member 1).
+Needs models/model.joblib (Member 2) or models/placeholder_model.joblib and data/processed/test_articles.csv (Member 1).
 """
 import sys
 from pathlib import Path
@@ -66,3 +66,14 @@ def test_edge_cases():
     short = analyze_article("短い文章です。")
     assert short.warnings and len(short.chunks) == 1
     _check_regions(short)
+
+
+def test_placeholder_used_only_without_member2_model():
+    import pipeline
+
+    if pipeline.MODEL_PATH.exists():
+        assert pipeline.model_path() == pipeline.MODEL_PATH
+        assert "(Member 2)" in pipeline.component_info()["model"]
+    else:
+        assert pipeline.model_path() == pipeline.PLACEHOLDER_PATH
+        assert "(placeholder)" in pipeline.component_info()["model"]

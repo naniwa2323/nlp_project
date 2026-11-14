@@ -2,8 +2,8 @@
 
 Trains on Member 1's data/processed/{train,test}_chunks.csv with the configuration from
 Member 2's spec (char TF-IDF 2-5gram + balanced LogisticRegression).
-This is NOT the team's official model. Replace models/model.joblib with Member 2's
-and delete models/model.PLACEHOLDER.
+This is NOT the team's official model. It is saved as models/placeholder_model.joblib
+(git-ignored); the app uses it only while Member 2's models/model.joblib is missing.
 
 Usage:
   python src/preprocess.py                       # Member 1 (if data/processed is missing)
@@ -34,10 +34,9 @@ def main():
     pipe.fit(tr.text, tr.label)
     print(classification_report(te.label, pipe.predict(te.text), digits=3))
 
-    out = ROOT / "models" / "model.joblib"
+    out = ROOT / "models" / "placeholder_model.joblib"
     out.parent.mkdir(exist_ok=True)
     joblib.dump(pipe, out)
-    out.with_suffix(".PLACEHOLDER").write_text("This model.joblib is a placeholder, not Member 2's.\n")
     print("saved", out)
 
 

@@ -43,7 +43,7 @@ pip install -r requirements.txt
 
 ```bash
 python src/preprocess.py                         # Member 1 -> data/processed/*.csv
-python placeholders/train_placeholder_model.py   # until Member 2's model.joblib arrives
+python placeholders/train_placeholder_model.py   # placeholder, used only until Member 2's model.joblib arrives
 python scripts/make_samples.py                   # demo articles with ground truth
 streamlit run app.py
 python -m pytest tests -q                        # tests
@@ -92,7 +92,8 @@ app.py                     Streamlit UI (Member 4)
 pipeline.py                integration: analyze_article() (Member 4)
 segmenter.py               region segmentation (Member 4 版; Member 3 版があればそちらを使用)
 boundary_detector.py       Member 3 (when delivered)
-models/model.joblib        Member 2
+models/model.joblib        Member 2 (committed)
+models/placeholder_model.joblib  placeholder (git-ignored)
 src/preprocess.py          Member 1
 data/processed/            Member 1 outputs
 placeholders/              temporary model for development (delete at the end)
