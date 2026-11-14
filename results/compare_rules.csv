@@ -1,0 +1,6 @@
+method,char_acc,verdict_acc,start_mae,avg_regions,char_acc_isfake1,char_acc_isfake2,char_acc_isfake0
+old: first switch,0.801,0.664,105.715,1.567,0.801,0.8,0.801
+new: regions (min_len=0),0.852,0.701,95.518,1.896,0.774,0.862,0.938
+new: regions (min_len=100),0.861,0.754,93.588,1.524,0.77,0.88,0.953
+new: regions (min_len=150),0.857,0.746,93.405,1.268,0.729,0.902,0.965
+new: regions (min_len=200),0.847,0.707,93.252,1.158,0.69,0.91,0.966

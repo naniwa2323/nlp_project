@@ -1,0 +1,5 @@
+sample,id,isfake,nchar_real,len
+1_human,77356fdc0da9,0,431,431
+2_ai,844f1a9f107a,2,0,558
+3_mixed_a,d6c56adc7a08,1,336,542
+4_mixed_b,8365e302d39e,1,269,410
