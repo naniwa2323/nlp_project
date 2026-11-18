@@ -1,0 +1,11 @@
+{
+  "evaluated_articles": 2608,
+  "mean_article_character_accuracy": 0.8772962545425788,
+  "article_type_accuracy": 0.7787576687116564,
+  "mixed_articles": 937,
+  "detected_mixed_articles": 659,
+  "boundary_detection_rate": 0.7033084311632871,
+  "boundary_mae_characters_detected_only": 92.56297420333838,
+  "threshold": 0.4,
+  "min_len": 100
+}

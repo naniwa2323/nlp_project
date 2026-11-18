@@ -1,0 +1,9 @@
+{
+  "threshold": 0.4,
+  "min_len": 100,
+  "mean_article_character_accuracy": 0.8811041910544295,
+  "article_type_accuracy": 0.7696737044145874,
+  "boundary_detection_rate": 0.6932270916334662,
+  "boundary_mae_characters_detected_only": 89.38314176245211,
+  "detected_mixed_articles": 522
+}
